@@ -1,124 +1,309 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REMUME 2025 - Porto Alegre</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #2a7f62; }
-    select, input[type="search"] { margin: 10px 0; padding: 5px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
-    tr.hidden { display: none; }
-  </style>
-</head>
-<body>
-
-  <h1>REMUME 2025 - Porto Alegre</h1>
-  <label for="categoria">Filtrar por Categoria:</label>
-  <select id="categoria" onchange="filtrarTabela()">
-    <option value="">Todas as Categorias</option>
-    <option value="Prescri√ß√£o em Via Simples">Prescri√ß√£o em Via Simples</option>
-    <option value="Antimicrobianos">Antimicrobianos</option>
-    <option value="Controle Especial">Controle Especial</option>
-  </select>
-
-  <label for="busca">Buscar Medicamento:</label>
-  <input type="search" id="busca" oninput="filtrarTabela()" placeholder="Digite o nome do medicamento">
-
-  <table id="tabela">
-    <thead>
-      <tr>
-        <th>Categoria</th>
-        <th>Medicamento</th>
-        <th>Observa√ß√£o</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Prescri√ß√£o em Via Simples</td>
-        <td>Aciclovir 200 mg comprimido</td>
-        <td>Farm√°cias Distritais e US com farmac√™utico presente</td>
-      </tr>
-      <tr>
-        <td>Prescri√ß√£o em Via Simples</td>
-        <td>√Åcido acetilsalic√≠lico 100 mg comprimido</td>
-        <td>Todas US e Farm√°cias Distritais</td>
-      </tr>
-      <tr>
-        <td>Prescri√ß√£o em Via Simples</td>
-        <td>√Åcido f√≥lico 5 mg comprimido</td>
-        <td>Todas US e Farm√°cias Distritais</td>
-      </tr>
-      <tr>
-        <td>Prescri√ß√£o em Via Simples</td>
-        <td>√Åcido fol√≠nico 15 mg comprimido</td>
-        <td>Farm√°cias Distritais</td>
-      </tr>
-      <tr>
-        <td>Antimicrobianos</td>
-        <td>Amoxicilina 50 mg/mL + Clavulanato 12,5 mg/mL suspens√£o oral</td>
-        <td>Farm√°cias Distritais e US com farmac√™utico presente</td>
-      </tr>
-      <tr>
-        <td>Controle Especial</td>
-        <td>Amitriptilina 25 mg comprimido</td>
-        <td>Farm√°cias Distritais</td>
-      </tr>
-      <tr>
-        <td>Controle Especial</td>
-        <td>Clonazepam 2,5 mg/mL solu√ß√£o oral</td>
-        <td>Farm√°cias Distritais</td>
-      </tr>
-      <tr>
-        <td>Controle Especial</td>
-        <td>Diazepam 5 mg comprimido</td>
-        <td>Farm√°cias Distritais</td>
-      </tr>
-      <tr>
-        <td>Controle Especial</td>
-        <td>Nortriptilina 25 mg comprimido</td>
-        <td>Farm√°cias Distritais</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <script>
-    const dadosMedicamentos = [
-      { categoria: 'Prescri√ß√£o em Via Simples', medicamento: 'Aciclovir 200 mg comprimido', observacao: 'Farm√°cias Distritais e US com farmac√™utico presente' },
-      { categoria: 'Prescri√ß√£o em Via Simples', medicamento: '√Åcido acetilsalic√≠lico 100 mg comprimido', observacao: 'Todas US e Farm√°cias Distritais' },
-      { categoria: 'Prescri√ß√£o em Via Simples', medicamento: '√Åcido f√≥lico 5 mg comprimido', observacao: 'Todas US e Farm√°cias Distritais' },
-      { categoria: 'Prescri√ß√£o em Via Simples', medicamento: '√Åcido fol√≠nico 15 mg comprimido', observacao: 'Farm√°cias Distritais' },
-      { categoria: 'Antimicrobianos', medicamento: 'Amoxicilina 50 mg/mL + Clavulanato 12,5 mg/mL suspens√£o oral', observacao: 'Farm√°cias Distritais e US com farmac√™utico presente' },
-      { categoria: 'Controle Especial', medicamento: 'Amitriptilina 25 mg comprimido', observacao: 'Farm√°cias Distritais' },
-      { categoria: 'Controle Especial', medicamento: 'Clonazepam 2,5 mg/mL solu√ß√£o oral', observacao: 'Farm√°cias Distritais' },
-      { categoria: 'Controle Especial', medicamento: 'Diazepam 5 mg comprimido', observacao: 'Farm√°cias Distritais' },
-      { categoria: 'Controle Especial', medicamento: 'Nortriptilina 25 mg comprimido', observacao: 'Farm√°cias Distritais' }
-    ];
-
-    function filtrarTabela() {
-      const categoriaFiltro = document.getElementById('categoria').value.toLowerCase();
-      const buscaFiltro = document.getElementById('busca').value.toLowerCase();
-      const tbody = document.getElementById('tabela').getElementsByTagName('tbody')[0];
-      tbody.innerHTML = '';
-
-      dadosMedicamentos.forEach(dado => {
-        if (
-          (categoriaFiltro === '' || dado.categoria.toLowerCase().includes(categoriaFiltro)) &&
-          (buscaFiltro === '' || dado.medicamento.toLowerCase().includes(buscaFiltro))
-        ) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${dado.categoria}</td><td>${dado.medicamento}</td><td>${dado.observacao}</td>`;
-          tbody.appendChild(tr);
-        }
-      });
-    }
-
-    setInterval(filtrarTabela, 60000); // Atualiza a tabela a cada 60 segundos
-    filtrarTabela(); // Chama a fun√ß√£o para exibir os dados ao carregar a p√°gina
-  </script>
-
-</body>
-</html>
+MEDICAMENTO E APRESENTAÄ«O;OBSERVAÄ«O;PRESCRIÄ«O EXIGIDA;;
+Aciclovir 200 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+µcido acetilsalic°lico 100 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+µcido f¢lico 5 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+µcido f¢lico 0,2mg/mL soluá∆o oral;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Conforme NT 13/2022";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+µcido fol°nico 15 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Albendazol 40 mg/mL suspens∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Albendazol 400 mg comprimido mastig†vel;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Alendronato de s¢dio 70 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Alopurinol 100 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Amiodarona 200 mg comprimido;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Conforme NT 12/2019";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Anlodipino 5 mg comprimido;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Conforme NT 05/2018";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Atenolol 50 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Beclometasona 250 mcg soluá∆o para inalaá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Beclometasona 50 mcg soluá∆o para inalaá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Budesonida 32 mcg/dose suspens∆o aquosa nasal;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Captopril 25 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Carbonato de C†lcio 1.250 mg (equivalente a 500 mg de c†lcio elementar) comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Carbonato de C†lcio 1.250 mg (equivalente a 500 mg de c†lcio elementar) + colecalciferol 400 UI comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Carvedilol 6,25 mg comprimido;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Conforme NT 06/2018";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Cloreto de S¢dio 9 mg/mL (0,9%) soluá∆o nasal;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Cianocobalamina (vitamina B12) 500 mcg/mL soluá∆o injet†vel (IM);"Dispon°vel em Farm†cias Distritais
+Conforme NT SMS 31614194/2024";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Dexametasona 1 mg/g (0,1%) creme dermatol¢gico;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Dexclorfeniramina 0,4 mg/mL soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Digoxina 0,25 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Dimenidrinato 25mg/mL + Cloridrato de Piridoxina 5 mg/mL soluá∆o oral;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Conforme NT 12/2022";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Dipirona 500 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Dipirona 500 mg/mL soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Enalapril 10 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Espironolactona 25 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Estriol 1mg/g, creme vaginal com aplicador;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Estrogànios Conjugados 0,625 mg dr†gea;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Fluconazol 150 mg c†psula;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Furosemida 40 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Glibenclamida 5 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Gliclazida 30 mg comprimido de liberaá∆o prolongada;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Hidroclorotiazida 25 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Ibuprofeno 600 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Ibuprofeno 50 mg/mL suspens∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Ipratr¢pio 0,25 mg/mL soluá∆o inalat¢ria;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Isossorbida (dinitrato) 5 mg comprimido sublingual;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Isossorbida (mononitrato) 20 mg comprimido;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Conforme NT 11/2019";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Itraconazol 100 mg comprimido;"Dispon°vel em Farm†cias Distritais 
+Conforme NT SMS 31617304/2024";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Ivermectina 6 mg comprimido;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+ Conforme NT 07/2020";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Lactulose 667mg/ml xarope;"Dispon°vel em Farm†cias Distritais.
+ Conforme NT 02/2023";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Levodopa 250 mg + Carbidopa 25 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Levodopa 100 mg + Benserazida 25 mg c†psula de liberaá∆o prolongada;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Levodopa 100 mg + Benserazida 25 mg comprimido dispers°vel;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Levodopa 200 mg + Benserazida 50 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Levotiroxina 25 mcg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Levotiroxina 50 mcg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Levotiroxina 100 mcg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Loratadina 10 mg comprimido;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Conforme NT 07/2018";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Losartana 50mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Medroxiprogesterona 10 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Metformina 850 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Metildopa 250 mg comprimido;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+APENAS PARA GESTANTES E PUêRPERAS";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Metoclopramida 10 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Metoclopramida 4 mg/mL soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Metoprolol (tartarato) 100 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Miconazol 20 mg/g (2%) creme vaginal;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Nistatina 100.000 UI/mL suspens∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+‡leo Mineral oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Omeprazol 20 mg c†psula;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Conforme NT 03/2019";MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Paracetamol 200 mg/mL soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Paracetamol 500 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Permetrina 10 mg/mL (1%) loá∆o;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Permetrina 50 mg/mL (5%) loá∆o;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Prednisolona 3 mg/mL soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Prednisona 20 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Prednisona 5 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Prometazina 25 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Propranolol 40 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Sais para Reidrataá∆o p¢ para soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Sinvastatina 20 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Sulfato de Salbutamol 120 mcg (equivalente a 100 mcg de salbutamol por dose) aerossol inalat¢rio;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Sulfato Ferroso 25 mg/mL soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Sulfato Ferroso 40 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Timolol 5 mg/mL (0,5%) soluá∆o oft†lmica;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Varfarina 5 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Verapamil 80 mg comprimido revestido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Vitaminas A 50.000 UI + D 10.000 UI/mL soluá∆o oral;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS COM PRESCRIÄ«O EM VIA SIMPLES;;
+Amoxicilina 50 mg/mL + Clavulanato de Pot†ssio 12,5 mg/mL suspens∆o oral;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Amoxicilina 500 mg + Clavulanato de Pot†ssio 125 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Amoxicilina 50 mg/mL suspens∆o oral;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Amoxicilina 500 mg c†psula;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Azitromicina 500 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Azitromicina 40 mg/mL suspens∆o oral;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Benzoilmetronidazol 40 mg/mL (equivalente a 25 mg/mL de metronidazol) suspens∆o oral;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Cefalexina 50 mg/mL suspens∆o oral;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Cefalexina 500 mg c†psula ou comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Ceftriaxona 500 mg p¢ para soluá∆o injet†vel intramuscular (IM);Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Ciprofloxacino 500 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Doxiciclina 100 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Metronidazol 100 mg/g creme/gel vaginal;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Metronidazol 250 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Neomicina 5mg/g + bacitracina 250ui/g, pomada t¢pica;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais;MEDICAMENTOS ANTIMICROBIANOS;;
+Nitrofuranto°na 100 mg c†psula;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Sulfametoxazol 400 mg + Trimetoprima 80 mg comprimido;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Sulfametoxazol 40 mg/mL + Trimetoprima 8 mg/mL suspens∆o oral;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+Tobramicina 3mg/mL soluá∆o oft†lmica estÇril;Dispon°vel em Farm†cias Distritais e US com farmacàutico presente;MEDICAMENTOS ANTIMICROBIANOS;;
+µcido Valproico 250 mg (ou valproato de s¢dio) c†psula ou comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+µcido Valproico (ou valproato de s¢dio) 500 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+µcido Valproico 50 mg/mL (ou valproato de s¢dio) soluá∆o oral;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Amitriptilina 25 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Biperideno 2 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Carbamazepina 20 mg/mL suspens∆o oral;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Carbamazepina 200 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Carbonato de L°tio 300 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Clonazepam 2,5 mg/mL soluá∆o oral;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Clorpromazina 100 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Clorpromazina 25 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Clorpromazina 40 mg/mL soluá∆o oral;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Diazepam 5 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Fenito°na 100 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Fenobarbital 100 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Fenobarbital 40 mg/mL soluá∆o oral;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Fluoxetina 20 mg c†psula ou comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Haloperidol 1 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Haloperidol 5 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Haloperidol 2 mg/mL soluá∆o oral;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Haloperidol (decanoato) 50 mg/mL soluá∆o injet†vel (IM);Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Imipramina 25 mg comprimido;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Nortriptilina 25 mg c†psula;Dispon°vel em Farm†cias Distritais;MEDICAMENTOS DE CONTROLE ESPECIAL;;
+Benzilpenicilina Benzatina 1.200.000 UI suspens∆o injet†vel;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Aquisiá∆o via SES e SMS ISTs e demais indicaá‰es da NT 08/2018        ";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Doxazosina 2 mg comprimido;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Conforme NT 11/2020";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Finasterida 5 mg comprimido;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Conforme NT 10/2020";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Insulina humana NPH 100 UI/mL suspens∆o injet†vel FRASCO;"Dispon°vel em todas Unidades de Sa£de
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Insulina humana regular 100 UI/mL soluá∆o injet†vel FRASCO;"Dispon°vel em todas Unidades de Sa£de 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Insulina humana NPH 100 UI/mL suspens∆o injet†vel CANETA;"Dispon°vel em Farm†cias Distritais e US 
+Conforme NT 31586539/2021
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Insulina humana regular 100 UI/mL soluá∆o injet†vel CANETA;"Dispon°vel em Farm†cias Distritais e US 
+Conforme NT 31586539/2021
+ Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+TUBETE insulina humana NPH 100 UI/ml, injetavel, 3mL;"Dispon°vel em Farm†cias Distritais e US 
+Conforme NT 31586539/2021
+ Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+TUBETE insulina humana REGular 100 UI/ml, injetavel, 3mL;"Dispon°vel em Farm†cias Distritais e US 
+Conforme NT 31586539/2021
+ Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Caneta para aplicacao de insulina (modelo REUTILIZAVEL);"Dispon°vel em Farm†cias Distritais e US 
+Conforme NT 31586539/2021
+ Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Algestona acetofenida 150mg/mL + enantato de estradiol 10mg/mL Injet†vel;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Etinilestradiol + 0,03 mg +Levonorgestrel 0,15 mg comprimido;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais Aquisiá∆o via MS;"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Medroxiprogesterona 150 mg/mL suspens∆o injet†vel;Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais - Aquisiá∆o via MS;"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Medroxiprogesterona (acetato) (25mg/0,5mL) + Cipionato de estradiol (5mg/0,5mL), IM, suspens∆o injet†vel;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Conforme NT 05/2023
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Levonorgestrel 0,75 mg comprimido;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Noretisterona 0,35 mg comprimido;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Noretisterona (Enantato) 50mg/mL + Estradiol (Valerato) 5 mg/mL soluá∆o injet†vel;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Tabagismo;;"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Bupropiona 150 mg comprimido de liberaá∆o prolongada;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Nicotina 7 mg adesivo transdÇrmico;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais 
+Conforme NT PMCTab nß 005/2019
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Nicotina 14 mg adesivo transdÇrmico;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais 
+Conforme NT PMCTab nß 005/2019
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Nicotina 21 mg adesivo transdÇrmico;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais 
+Conforme NT PMCTab nß 005/2019
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Goma de mascar de Nicotina 2mg;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais 
+Conforme NT PMCTab nß 005/2019
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Etambutol 400mg comprimido;"Dispon°vel nos Serviáos de Atendimento Especializado 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+H (isoniazida 100mg) comprimido;"Dispon°vel em todas Unidades de Sa£de (conforme demanda)
+Nota Informativa Nß 5/2021-CGDR/DCCI/SVS/MS
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+H (isoniazida 300mg) comprimido;"Dispon°vel em todas Unidades de Sa£de (conforme demanda)
+Nota Informativa Nß 5/2021-CGDR/DCCI/SVS/MS
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Pirazinamida 150mg comprimido dispers°vel;"Dispon°vel nos Serviáos de Atendimento Especializado
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Pirazinamida 500mg comprimido;"Dispon°vel nos Serviáos de Atendimento Especializado 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Piridoxina 50mg comprimido;"Dispon°vel em todas Unidades de Sa£de (conforme demanda)
+Nota Informativa Nß 16/2024-CGTM/DATHI/SVSA/MS
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+RH (rifampicina 150mg + isoniazida 75mg) comprimido;"Dispon°vel em todas Unidades de Sa£de 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+RH (rifampicina 300mg + isoniazida 150mg) comprimido;"Dispon°vel em todas Unidades de Sa£de 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+RH (rifampicina 75mg + isoniazida 50mg) comprimido dispers°vel;"Dispon°vel nos Serviáos de Atendimento Especializado 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+RHZ (rifampicina 75mg + isoniazida 50mg + pirazinamida 150mg) comprimido dispers°vel;"Dispon°vel nos Serviáos de Atendimento Especializado 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+RHZE (rifampicina 150mg + isoniazida 75mg + pirazinamida 400mg + etambutol 275mg) comprimido;"Dispon°vel em todas Unidades de Sa£de 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Rifampicina 20mg/ml (2%) suspens∆o oral;"Dispon°vel nos Serviáos de Atendimento Especializado 
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Rifampicina 300mg c†psula;"Dispon°vel nos Serviáos de Atendimento Especializado 
+Nota Informativa Nß 5/2021-CGDR/DCCI/SVS/MS
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Rifapentina 150mg comprimido;"Dispon°vel em todas Unidades de Sa£de (conforme demanda)
+e nos Serviáos de Atendimento Especializado 
+Nota Informativa Nß 5/2021-CGDR/DCCI/SVS/MS
+Aquisiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Rifapentina 300mg + Isoniazida 300mg comprimido DOSE FIXA COMBINADA;"Dispon°vel em todas Unidades de Sa£de 
+Distribuiá∆o via MS";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Espiramicina 500 mg comprimido;"Dispon°vel em Farm†cias Distritais 
+APENAS PARA GESTANTES
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Pirimetamina 25 mg comprimido;"Dispon°vel em Farm†cias Distritais 
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Sulfadiazina 500 mg comprimido;"Dispon°vel em Farm†cias Distritais 
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Oseltamivir (fosfato) 75 mg c†psula;"Dispon°vel em todas Unidades de Sa£de e Farm†cias Distritais
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Oseltamivir (fosfato) 45 mg c†psula;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Oseltamivir (fosfato) 30 mg c†psula;"Dispon°vel em Farm†cias Distritais e US com farmacàutico presente
+Aquisiá∆o via SES";"MEDICAMENTOS DE PROGRAMAS ESPEC÷FICOS
+Dispon°veis conforme critÇrios espec°ficos de cada programa";;
+Epinefrina 1 mg/mL soluá∆o injet†vel (adrenalina) (IM/EV);Distribuiá∆o conforme NT 01/2024;"MEDICAMENTOS DE EMERG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Glicose Hipertìnica 500 mg/mL (50%) soluá∆o injet†vel 10 mL;Distribuiá∆o conforme NT 01/2024;"MEDICAMENTOS DE EMERG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Hidrocortisona 100 mg p¢ para soluá∆o injet†vel;Distribuiá∆o conforme NT 01/2024;"MEDICAMENTOS DE EMERG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Hidrocortisona 500 mg p¢ para soluá∆o injet†vel;Distribuiá∆o conforme NT 01/2024;"MEDICAMENTOS DE EMERG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Biperideno 5 mg/mL soluá∆o injet†vel (IM/EV);Distribuiá∆o conforme NT 01/2024;"MEDICAMENTOS DE EMERG“NCIA - CONTROLE ESPECIAL
+Uso exclusivo ambulatorial";;
+Diazepam 5 mg/mL soluá∆o injet†vel (IM/EV);Distribuiá∆o conforme NT 01/2024;"""MEDICAMENTOS DE EMERG“NCIA - CONTROLE ESPECIAL
+Uso exclusivo ambulatorial""	";;
+Haloperidol 5 mg/mL soluá∆o injet†vel (IM);Distribuiá∆o conforme NT 01/2024;"MEDICAMENTOS DE EMERG“NCIA - CONTROLE ESPECIAL
+Uso exclusivo ambulatorial";;
+Diclofenaco de s¢dio 25 mg/mL soluá∆o injet†vel (IM);Distribuiá∆o conforme NT 02/2024;"MEDICAMENTOS DE URG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Dipirona 500 mg/mL soluá∆o injet†vel (IM/EV);Distribuiá∆o conforme NT 02/2024;"MEDICAMENTOS DE URG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Furosemida 10 mg/mL soluá∆o injet†vel (IM/EV);Distribuiá∆o conforme NT 02/2024;"MEDICAMENTOS DE URG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Hioscina(N-butilescopolamina) 20 mg/mL soluá∆o injet†vel (EV);Distribuiá∆o conforme NT 02/2024;"MEDICAMENTOS DE URG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Metoclopramida 5 mg/mL soluá∆o injet†vel (IM/EV);Distribuiá∆o conforme NT 02/2024;"MEDICAMENTOS DE URG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
+Prometazina 25 mg/mL soluá∆o injet†vel (IM);Distribuiá∆o conforme NT 02/2024;"MEDICAMENTOS DE URG“NCIA - BµSICOS
+Uso exclusivo ambulatorial";;
