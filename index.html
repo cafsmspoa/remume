@@ -1,30 +1,124 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>REMUME 2025 — Consulta Rápida</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REMUME 2025 - Porto Alegre</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #2a7f62; }
+    select, input[type="search"] { margin: 10px 0; padding: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    tr.hidden { display: none; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>REMUME 2025 — Consulta Rápida</h1>
-    <p>Busque por medicamento ou filtre por categoria.</p>
-    <input id="searchInput" type="search" placeholder="Ex.: ácido fólico, amoxicilina..." autofocus />
-    <select id="filterCategory">
-      <option value="">Todas as categorias</option>
-    </select>
-  </header>
 
-  <main>
-    <section id="results"></section>
-  </main>
+  <h1>REMUME 2025 - Porto Alegre</h1>
+  <label for="categoria">Filtrar por Categoria:</label>
+  <select id="categoria" onchange="filtrarTabela()">
+    <option value="">Todas as Categorias</option>
+    <option value="Prescrição em Via Simples">Prescrição em Via Simples</option>
+    <option value="Antimicrobianos">Antimicrobianos</option>
+    <option value="Controle Especial">Controle Especial</option>
+  </select>
 
-  <footer>
-    <small>Fonte: Secretaria Municipal de Saúde de Porto Alegre — REMUME 2025</small>
-  </footer>
+  <label for="busca">Buscar Medicamento:</label>
+  <input type="search" id="busca" oninput="filtrarTabela()" placeholder="Digite o nome do medicamento">
 
-  <script src="scripts/app.js"></script>
+  <table id="tabela">
+    <thead>
+      <tr>
+        <th>Categoria</th>
+        <th>Medicamento</th>
+        <th>Observação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Prescrição em Via Simples</td>
+        <td>Aciclovir 200 mg comprimido</td>
+        <td>Farmácias Distritais e US com farmacêutico presente</td>
+      </tr>
+      <tr>
+        <td>Prescrição em Via Simples</td>
+        <td>Ácido acetilsalicílico 100 mg comprimido</td>
+        <td>Todas US e Farmácias Distritais</td>
+      </tr>
+      <tr>
+        <td>Prescrição em Via Simples</td>
+        <td>Ácido fólico 5 mg comprimido</td>
+        <td>Todas US e Farmácias Distritais</td>
+      </tr>
+      <tr>
+        <td>Prescrição em Via Simples</td>
+        <td>Ácido folínico 15 mg comprimido</td>
+        <td>Farmácias Distritais</td>
+      </tr>
+      <tr>
+        <td>Antimicrobianos</td>
+        <td>Amoxicilina 50 mg/mL + Clavulanato 12,5 mg/mL suspensão oral</td>
+        <td>Farmácias Distritais e US com farmacêutico presente</td>
+      </tr>
+      <tr>
+        <td>Controle Especial</td>
+        <td>Amitriptilina 25 mg comprimido</td>
+        <td>Farmácias Distritais</td>
+      </tr>
+      <tr>
+        <td>Controle Especial</td>
+        <td>Clonazepam 2,5 mg/mL solução oral</td>
+        <td>Farmácias Distritais</td>
+      </tr>
+      <tr>
+        <td>Controle Especial</td>
+        <td>Diazepam 5 mg comprimido</td>
+        <td>Farmácias Distritais</td>
+      </tr>
+      <tr>
+        <td>Controle Especial</td>
+        <td>Nortriptilina 25 mg comprimido</td>
+        <td>Farmácias Distritais</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    const dadosMedicamentos = [
+      { categoria: 'Prescrição em Via Simples', medicamento: 'Aciclovir 200 mg comprimido', observacao: 'Farmácias Distritais e US com farmacêutico presente' },
+      { categoria: 'Prescrição em Via Simples', medicamento: 'Ácido acetilsalicílico 100 mg comprimido', observacao: 'Todas US e Farmácias Distritais' },
+      { categoria: 'Prescrição em Via Simples', medicamento: 'Ácido fólico 5 mg comprimido', observacao: 'Todas US e Farmácias Distritais' },
+      { categoria: 'Prescrição em Via Simples', medicamento: 'Ácido folínico 15 mg comprimido', observacao: 'Farmácias Distritais' },
+      { categoria: 'Antimicrobianos', medicamento: 'Amoxicilina 50 mg/mL + Clavulanato 12,5 mg/mL suspensão oral', observacao: 'Farmácias Distritais e US com farmacêutico presente' },
+      { categoria: 'Controle Especial', medicamento: 'Amitriptilina 25 mg comprimido', observacao: 'Farmácias Distritais' },
+      { categoria: 'Controle Especial', medicamento: 'Clonazepam 2,5 mg/mL solução oral', observacao: 'Farmácias Distritais' },
+      { categoria: 'Controle Especial', medicamento: 'Diazepam 5 mg comprimido', observacao: 'Farmácias Distritais' },
+      { categoria: 'Controle Especial', medicamento: 'Nortriptilina 25 mg comprimido', observacao: 'Farmácias Distritais' }
+    ];
+
+    function filtrarTabela() {
+      const categoriaFiltro = document.getElementById('categoria').value.toLowerCase();
+      const buscaFiltro = document.getElementById('busca').value.toLowerCase();
+      const tbody = document.getElementById('tabela').getElementsByTagName('tbody')[0];
+      tbody.innerHTML = '';
+
+      dadosMedicamentos.forEach(dado => {
+        if (
+          (categoriaFiltro === '' || dado.categoria.toLowerCase().includes(categoriaFiltro)) &&
+          (buscaFiltro === '' || dado.medicamento.toLowerCase().includes(buscaFiltro))
+        ) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${dado.categoria}</td><td>${dado.medicamento}</td><td>${dado.observacao}</td>`;
+          tbody.appendChild(tr);
+        }
+      });
+    }
+
+    setInterval(filtrarTabela, 60000); // Atualiza a tabela a cada 60 segundos
+    filtrarTabela(); // Chama a função para exibir os dados ao carregar a página
+  </script>
+
 </body>
 </html>
