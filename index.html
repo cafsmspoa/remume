@@ -360,16 +360,542 @@
         // Dados dos medicamentos (extraídos do Excel)
         const medicamentos = [
             { nome: "Aciclovir", apresentacao: "200 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
-            { nome: "Ácido acetilsalicílico", apresentacao: "100 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
-            { nome: "Ácido fólico", apresentacao: "5 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
-            // ... (todos os outros medicamentos seriam adicionados aqui)
-            // Por questão de espaço no exemplo, estou incluindo apenas alguns
-            { nome: "Amoxicilina", apresentacao: "50 mg/mL + Clavulanato de Potássio 12,5 mg/mL suspensão oral", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
-            { nome: "Ácido Valproico", apresentacao: "250 mg (ou valproato de sódio) cápsula ou comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
-            { nome: "Benzilpenicilina Benzatina", apresentacao: "1.200.000 UI suspensão injetável", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais. Aquisição via SES e SMS ISTs e demais indicações da NT 08/2018", prescricao: "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS" },
-            { nome: "Epinefrina", apresentacao: "1 mg/mL solução injetável (adrenalina) (IM/EV)", observacoes: "Distribuição conforme NT 01/2024", prescricao: "MEDICAMENTOS DE EMERGÊNCIA - BÁSICOS. Uso exclusivo ambulatorial" },
-            { nome: "Diclofenaco de sódio", apresentacao: "25 mg/mL solução injetável (IM)", observacoes: "Distribuição conforme NT 02/2024", prescricao: "MEDICAMENTOS DE URGÊNCIA - BÁSICOS. Uso exclusivo ambulatorial" }
-        ];
+{ nome: "Ácido acetilsalicílico", apresentacao: "100 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Ácido fólico", apresentacao: "5 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Ácido fólico", apresentacao: "0,2mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais ConformeNT 13/2022", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Ácido folínico", apresentacao: "15 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Albendazol", apresentacao: "40 mg/mL suspensão oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Albendazol", apresentacao: "400 mg comprimido mastigável", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Alendronato de sódio", apresentacao: "70 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Alopurinol", apresentacao: "100 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Amiodarona", apresentacao: "200 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente ConformeNT 12/2019", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Anlodipino", apresentacao: "5 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais ConformeNT 05/2018", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Atenolol", apresentacao: "50 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Beclometasona", apresentacao: "250 mcg solução para inalação oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Beclometasona", apresentacao: "50 mcg solução para inalação oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Budesonida", apresentacao: "32 mcg/dose suspensão aquosa nasal", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Captopril", apresentacao: "25 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Carbonato de Cálcio", apresentacao: "1.250 mg (equivalente a 500 mg de cálcio elementar) comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Carbonato de Cálcio", apresentacao: "1.250 mg (equivalente a 500 mg de cálcio elementar) + colecalciferol 400 UI comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Carvedilol", apresentacao: "6,25 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais ConformeNT 06/2018", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Cloreto de Sódio", apresentacao: "9 mg/mL (0,9%) solução nasal", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Cianocobalamina (vitamina B12)", apresentacao: "500 mcg/mL solução injetável (IM)", observacoes: "Disponível em Farmácias Distritais ConformeNT SMS 31614194/2024", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Dexametasona", apresentacao: "1 mg/g (0,1%) creme dermatológico", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Dexclorfeniramina", apresentacao: "0,4 mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Digoxina", apresentacao: "0,25 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Dimenidrinato", apresentacao: "25mg/mL + Cloridrato de Piridoxina 5 mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais ConformeNT 12/2022", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Dipirona", apresentacao: "500 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Dipirona", apresentacao: "500 mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Enalapril", apresentacao: "10 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Espironolactona", apresentacao: "25 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Estriol", apresentacao: "1mg/g, creme vaginal com aplicador", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Estrogênios Conjugados", apresentacao: "0,625 mg drágea", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Fluconazol", apresentacao: "150 mg cápsula", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Furosemida", apresentacao: "40 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Glibenclamida", apresentacao: "5 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Gliclazida", apresentacao: "30 mg comprimido de liberação prolongada", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Hidroclorotiazida", apresentacao: "25 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Ibuprofeno", apresentacao: "600 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Ibuprofeno", apresentacao: "50 mg/mL suspensão oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Ipratrópio", apresentacao: "0,25 mg/mL solução inalatória", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Isossorbida (dinitrato)", apresentacao: "5 mg comprimido sublingual", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Isossorbida (mononitrato)", apresentacao: "20 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente ConformeNT 11/2019", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Itraconazol", apresentacao: "100 mg comprimido", observacoes: "Disponível em Farmácias Distritais ConformeNT SMS 31617304/2024", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Ivermectina", apresentacao: "6 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente ConformeNT 07/2020", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Lactulose", apresentacao: "667mg/ml xarope", observacoes: "Disponível em Farmácias Distritais ConformeNT 02/2023", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Levodopa", apresentacao: "250 mg + Carbidopa 25 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Levodopa", apresentacao: "100 mg + Benserazida 25 mg cápsula de liberação prolongada", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Levodopa", apresentacao: "100 mg + Benserazida 25 mg comprimido dispersível", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Levodopa", apresentacao: "200 mg + Benserazida 50 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Levotiroxina", apresentacao: "25 mcg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Levotiroxina", apresentacao: "50 mcg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Levotiroxina", apresentacao: "100 mcg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Loratadina", apresentacao: "10 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais ConformeNT 07/2018", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Losartana", apresentacao: "50mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Medroxiprogesterona", apresentacao: "10 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Metformina", apresentacao: "850 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Metildopa", apresentacao: "250 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente APENAS PARA GESTANTES E PUÉRPERAS", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Metoclopramida", apresentacao: "10 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Metoclopramida", apresentacao: "4 mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Metoprolol (tartarato)", apresentacao: "100 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Miconazol", apresentacao: "20 mg/g (2%) creme vaginal", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Nistatina", apresentacao: "100.000 UI/mL suspensão oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Óleo Mineral", apresentacao: "oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Omeprazol", apresentacao: "20 mg cápsula", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais ConformeNT 03/2019", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Paracetamol", apresentacao: "200 mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Paracetamol", apresentacao: "500 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Permetrina", apresentacao: "10 mg/mL (1%) loção", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Permetrina", apresentacao: "50 mg/mL (5%) loção", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Prednisolona", apresentacao: "3 mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Prednisona", apresentacao: "20 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Prednisona", apresentacao: "5 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Prometazina", apresentacao: "25 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Propranolol", apresentacao: "40 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Sais para Reidratação", apresentacao: "pó para solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Sinvastatina", apresentacao: "20 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Sulfato de Salbutamol", apresentacao: "120 mcg (equivalente a 100 mcg de salbutamol por dose) aerossol inalatório", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Sulfato Ferroso", apresentacao: "25 mg/mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Sulfato Ferroso", apresentacao: "40 mg comprimido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Timolol", apresentacao: "5 mg/mL (0,5%) solução oftálmica", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Varfarina", apresentacao: "5 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Verapamil", apresentacao: "80 mg comprimido revestido", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Vitaminas A 50.000 UI + D 10.000 UI", apresentacao: "mL solução oral", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS COM PRESCRIÇÃO EM VIA SIMPLES" },
+{ nome: "Amoxicilina", apresentacao: "50 mg/mL + Clavulanato de Potássio 12,5 mg/mL suspensão oral", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Amoxicilina", apresentacao: "500 mg + Clavulanato de Potássio 125 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Amoxicilina", apresentacao: "50 mg/mL suspensão oral", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Amoxicilina", apresentacao: "500 mg cápsula", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Azitromicina", apresentacao: "500 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Azitromicina", apresentacao: "40 mg/mL suspensão oral", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Benzoilmetronidazol", apresentacao: "40 mg/mL (equivalente a 25 mg/mL de metronidazol) suspensão oral", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Cefalexina", apresentacao: "50 mg/mL suspensão oral", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Cefalexina", apresentacao: "500 mg cápsula ou comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Ceftriaxona", apresentacao: "500 mg pó para solução injetável intramuscular (IM)", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Ciprofloxacino", apresentacao: "500 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Doxiciclina", apresentacao: "100 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Metronidazol", apresentacao: "100 mg/g creme/gel vaginal", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Metronidazol", apresentacao: "250 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Neomicina", apresentacao: "5mg/g + bacitracina 250ui/g, pomada tópica", observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Nitrofurantoína", apresentacao: "100 mg cápsula", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Sulfametoxazol", apresentacao: "400 mg + Trimetoprima 80 mg comprimido", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Sulfametoxazol", apresentacao: "40 mg/mL + Trimetoprima 8 mg/mL suspensão oral", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Tobramicina", apresentacao: "3mg/mL solução oftálmica estéril", observacoes: "Disponível em Farmácias Distritais e US com farmacêutico presente", prescricao: "MEDICAMENTOS ANTIMICROBIANOS" },
+{ nome: "Ácido Valproico", apresentacao: "250 mg (ou valproato de sódio) cápsula ou comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Ácido Valproico (ou valproato de sódio)", apresentacao: "500 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Ácido Valproico", apresentacao: "50 mg/mL (ou valproato de sódio) solução oral", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Amitriptilina", apresentacao: "25 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Biperideno", apresentacao: "2 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Carbamazepina", apresentacao: "20 mg/mL suspensão oral", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Carbamazepina", apresentacao: "200 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Carbonato de Lítio", apresentacao: "300 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Clonazepam", apresentacao: "2,5 mg/mL solução oral", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Clorpromazina", apresentacao: "100 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Clorpromazina", apresentacao: "25 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Clorpromazina", apresentacao: "40 mg/mL solução oral", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Diazepam", apresentacao: "5 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Fenitoína", apresentacao: "100 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Fenobarbital", apresentacao: "100 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Fenobarbital", apresentacao: "40 mg/mL solução oral", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Fluoxetina", apresentacao: "20 mg cápsula ou comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Haloperidol", apresentacao: "1 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Haloperidol", apresentacao: "5 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Haloperidol", apresentacao: "2 mg/mL solução oral", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Haloperidol (decanoato)", apresentacao: "50 mg/mL solução injetável (IM)", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Imipramina", apresentacao: "25 mg comprimido", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Nortriptilina", apresentacao: "25 mg cápsula", observacoes: "Disponível em Farmácias Distritais", prescricao: "MEDICAMENTOS DE CONTROLE ESPECIAL" },
+{ nome: "Benzilpenicilina Benzatina",
+    apresentacao: "1.200.000 UI suspensão injetável",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Aquisição via SES e SMS ISTs e demais indicações da NT 08/2018",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Doxazosina",
+    apresentacao: "2 mg comprimido",
+    observacoes:
+      "Disponível em Farmácias Distritais e US com farmacêutico presente. Conforme NT 11/2020",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Uso%20e%20Dose%20M%C3%A1xima%20Dispensada%20Doxazosina%20-%20011-2020.pdf"
+  },
+  {
+    nome: "Finasterida",
+    apresentacao: "5 mg comprimido",
+    observacoes:
+      "Disponível em Farmácias Distritais e US com farmacêutico presente. Conforme NT 10/2020",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Uso%20e%20Dose%20Maxima%20Dispensada%20Finasterida%20-%2010-2020.pdf"
+  },
+  {
+    nome: "Insulina humana NPH",
+    apresentacao: "100 UI/mL suspensão injetável FRASCO",
+    observacoes: "Disponível em todas Unidades de Saúde. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Insulina humana regular",
+    apresentacao: "100 UI/mL solução injetável FRASCO",
+    observacoes: "Disponível em todas Unidades de Saúde. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Insulina humana NPH",
+    apresentacao: "100 UI/mL suspensão injetável CANETA",
+    observacoes:
+      "Disponível em Farmácias Distritais e US. Conforme NT 31586539/2021. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Orienta%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Canetas%20Aplicadoras%20de%20%20Insulina%20-%20Insulina%20Humana%20NPH%20100UL-ml%20Tubete%203ml%20-%20Insulina%20Humana%20Regular%20100UL-ml%20Tubete%203ml%20-%20Agulh.pdf"
+  },
+  {
+    nome: "Insulina humana regular",
+    apresentacao: "100 UI/mL solução injetável CANETA",
+    observacoes:
+      "Disponível em Farmácias Distritais e US. Conforme NT 31586539/2021. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Orienta%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Canetas%20Aplicadoras%20de%20%20Insulina%20-%20Insulina%20Humana%20NPH%20100UL-ml%20Tubete%203ml%20-%20Insulina%20Humana%20Regular%20100UL-ml%20Tubete%203ml%20-%20Agulh.pdf"
+  },
+  {
+    nome: "TUBETE insulina humana NPH",
+    apresentacao: "100 UI/ml, injetavel, 3mL",
+    observacoes:
+      "Disponível em Farmácias Distritais e US. Conforme NT 31586539/2021. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Orienta%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Canetas%20Aplicadoras%20de%20%20Insulina%20-%20Insulina%20Humana%20NPH%20100UL-ml%20Tubete%203ml%20-%20Insulina%20Humana%20Regular%20100UL-ml%20Tubete%203ml%20-%20Agulh.pdf"
+  },
+  {
+    nome: "TUBETE insulina humana REGular",
+    apresentacao: "100 UI/ml, injetavel, 3mL",
+    observacoes:
+      "Disponível em Farmácias Distritais e US. Conforme NT 31586539/2021. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Orienta%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Canetas%20Aplicadoras%20de%20%20Insulina%20-%20Insulina%20Humana%20NPH%20100UL-ml%20Tubete%203ml%20-%20Insulina%20Humana%20Regular%20100UL-ml%20Tubete%203ml%20-%20Agulh.pdf"
+  },
+  {
+    nome: "Caneta para aplicacao de insulina (modelo REUTILIZAVEL)",
+    apresentacao: "",
+    observacoes:
+      "Disponível em Farmácias Distritais e US. Conforme NT 31586539/2021. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Orienta%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Canetas%20Aplicadoras%20de%20%20Insulina%20-%20Insulina%20Humana%20NPH%20100UL-ml%20Tubete%203ml%20-%20Insulina%20Humana%20Regular%20100UL-ml%20Tubete%203ml%20-%20Agulh.pdf"
+  },
+  {
+    nome: "Algestona acetofenida + enantato de estradiol",
+    apresentacao: "150mg/mL + 10mg/mL injetável",
+    observacoes:
+      "Disponível em Farmácias Distritais e US com farmacêutico presente. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Etinilestradiol + Levonorgestrel",
+    apresentacao: "0,03 mg + 0,15 mg comprimido",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Medroxiprogesterona",
+    apresentacao: "150 mg/mL suspensão injetável",
+    observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais . Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Medroxiprogesterona (acetato) + Cipionato de estradiol",
+    apresentacao: "25mg/0,5mL + 5mg/0,5mL IM suspensão injetável",
+    observacoes:
+      "Disponível em Farmácias Distritais e US com farmacêutico presente. Conforme NT 05/2023. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Disponibilidade%20-%20Medicamento%20-%20Medroxiprogesterona%20%28acetato%29%20%2825mg_0%2C5mL%29%20%2B%20Cipionato%20de%20Estradiol%20%285mg_0%2C5mL%29%20-%20005-2023.pdf"
+  },
+  {
+    nome: "Levonorgestrel",
+    apresentacao: "0,75 mg comprimido",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Noretisterona",
+    apresentacao: "0,35 mg comprimido",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Noretisterona (Enantato) + Estradiol (Valerato)",
+    apresentacao: "50mg/mL + 5 mg/mL solução injetável",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Tabagismo",
+    apresentacao: "",
+    observacoes: "",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Bupropiona",
+    apresentacao: "150 mg comprimido de liberação prolongada",
+    observacoes:
+      "Disponível em Farmácias Distritais e US com farmacêutico presente. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Nicotina",
+    apresentacao: "7 mg adesivo transdérmico",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Conforme NT PMCTab nº 005/2019. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Prescri%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Entrega%20de%20Insumos%20-%20Terapia%20de%20Reposi%C3%A7%C3%A3o%20-%20Nicotina%20-%20005-2019.pdf"
+  },
+  {
+    nome: "Nicotina",
+    apresentacao: "14 mg adesivo transdérmico",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Conforme NT PMCTab nº 005/2019. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Prescri%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Entrega%20de%20Insumos%20-%20Terapia%20de%20Reposi%C3%A7%C3%A3o%20-%20Nicotina%20-%20005-2019.pdf"
+  },
+  {
+    nome: "Nicotina",
+    apresentacao: "21 mg adesivo transdérmico",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Conforme NT PMCTab nº 005/2019. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Prescri%C3%A7%C3%A3o%20-%20Dispensa%C3%A7%C3%A3o%20-%20Entrega%20de%20Insumos%20-%20Terapia%20de%20Reposi%C3%A7%C3%A3o%20-%20Nicotina%20-%20005-2019.pdf"
+  },
+  {
+    nome: "Goma de mascar de Nicotina",
+    apresentacao: "2mg",
+    observacoes:
+      "Disponível em todas Unidades de Saúde e Farmácias Distritais. Conforme NT PMCTab nº 005/2019. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Etambutol",
+    apresentacao: "400mg comprimido",
+    observacoes: "Disponível nos Serviços de Atendimento Especializado. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "H (isoniazida)",
+    apresentacao: "100mg comprimido",
+    observacoes:
+      "Disponível em todas Unidades de Saúde (conforme demanda). Nota Informativa Nº 5/2021-CGDR/DCCI/SVS/MS. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://www.gov.br/aids/pt-br/central-de-conteudo/notas-informativas/2021/nota-informativa-no-5-2021-cgdr-dcci-svs-ms"
+  },
+  {
+    nome: "H (isoniazida)",
+    apresentacao: "300mg comprimido",
+    observacoes:
+      "Disponível em todas Unidades de Saúde (conforme demanda). Nota Informativa Nº 5/2021-CGDR/DCCI/SVS/MS. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa",
+    referencia:
+      "https://www.gov.br/aids/pt-br/central-de-conteudo/notas-informativas/2021/nota-informativa-no-5-2021-cgdr-dcci-svs-ms"
+  },
+  {
+    nome: "Pirazinamida",
+    apresentacao: "150mg comprimido dispersível",
+    observacoes:
+      "Disponível nos Serviços de Atendimento Especializado. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Pirazinamida",
+    apresentacao: "500mg comprimido",
+    observacoes:
+      "Disponível nos Serviços de Atendimento Especializado. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Piridoxina",
+    apresentacao: "50mg comprimido",
+    observacoes:
+      "Disponível em todas Unidades de Saúde (conforme demanda). Nota Informativa Nº 16/2024-CGTM/DATHI/SVSA/MS. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "RH (rifampicina + isoniazida) comprimidos",
+    apresentacao: [
+      "150mg + 75mg",
+      "300mg + 150mg",
+      "75mg + 50mg comprimido dispersível"
+    ],
+    observacoes:
+      "Disponível em todas Unidades de Saúde. Aquisição via MS. Disponível nos Serviços de Atendimento Especializado para dose fixa combinada",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "RHZ (rifampicina + isoniazida + pirazinamida)",
+    apresentacao: "75mg + 50mg + 150mg comprimido dispersível",
+    observacoes:
+      "Disponível nos Serviços de Atendimento Especializado. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "RHZE (rifampicina + isoniazida + pirazinamida + etambutol)",
+    apresentacao: "150mg + 75mg + 400mg + 275mg comprimido",
+    observacoes:
+      "Disponível em todas Unidades de Saúde. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Rifampicina",
+    apresentacao: [
+      "20mg/ml (2%) suspensão oral",
+      "300mg cápsula"
+    ],
+    observacoes:
+      "Disponível nos Serviços de Atendimento Especializado. Nota Informativa Nº 5/2021-CGDR/DCCI/SVS/MS. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Rifapentina",
+    apresentacao: [
+      "150mg comprimido",
+      "300mg + Isoniazida 300mg comprimido DOSE FIXA COMBINADA"
+    ],
+    observacoes:
+      "Disponível em todas Unidades de Saúde (conforme demanda) e nos Serviços de Atendimento Especializado. Nota Informativa Nº 5/2021-CGDR/DCCI/SVS/MS. Aquisição via MS",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Espiramicina",
+    apresentacao: "500 mg comprimido",
+    observacoes: "Disponível em Farmácias Distritais. Apenas para gestantes. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Pirimetamina",
+    apresentacao: "25 mg comprimido",
+    observacoes: "Disponível em Farmácias Distritais. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Sulfadiazina",
+    apresentacao: "500 mg comprimido",
+    observacoes: "Disponível em Farmácias Distritais. Aquisição via SES",
+    prescricao:
+      "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+   {
+    nome: "Oseltamivir (fosfato)",
+    apresentacao: ["75 mg cápsula", "45 mg cápsula", "30 mg cápsula"],
+    observacoes: "Disponível em todas Unidades de Saúde e Farmácias Distritais. Alguns disponíveis em US com farmacêutico presente. Aquisição via SES",
+    prescricao: "MEDICAMENTOS DE PROGRAMAS ESPECÍFICOS Disponíveis conforme critérios específicos de cada programa"
+  },
+  {
+    nome: "Epinefrina",
+    apresentacao: "1 mg/mL solução injetável (adrenalina) (IM/EV)",
+    observacoes: "Distribuição conforme NT 01/2024",
+    prescricao: "MEDICAMENTOS DE EMERGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Maleta%20de%20Emerg%C3%AAncia%20-%20001-2024.pdf"
+  },
+  {
+    nome: "Glicose Hipertônica",
+    apresentacao: "500 mg/mL (50%) solução injetável 10 mL",
+    observacoes: "Distribuição conforme NT 01/2024",
+    prescricao: "MEDICAMENTOS DE EMERGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Maleta%20de%20Emerg%C3%AAncia%20-%20001-2024.pdf"
+  },
+  {
+    nome: "Hidrocortisona",
+    apresentacao: ["100 mg pó para solução injetável", "500 mg pó para solução injetável"],
+    observacoes: "Distribuição conforme NT 01/2024",
+    prescricao: "MEDICAMENTOS DE EMERGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Maleta%20de%20Emerg%C3%AAncia%20-%20001-2024.pdf"
+  },
+  {
+    nome: "Biperideno",
+    apresentacao: "5 mg/mL solução injetável (IM/EV)",
+    observacoes: "Distribuição conforme NT 01/2024",
+    prescricao: "MEDICAMENTOS DE EMERGÊNCIA - CONTROLE ESPECIAL Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Maleta%20de%20Emerg%C3%AAncia%20-%20001-2024.pdf"
+  },
+  {
+    nome: "Diazepam",
+    apresentacao: "5 mg/mL solução injetável (IM/EV)",
+    observacoes: "Distribuição conforme NT 01/2024",
+    prescricao: "MEDICAMENTOS DE EMERGÊNCIA - CONTROLE ESPECIAL Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Maleta%20de%20Emerg%C3%AAncia%20-%20001-2024.pdf"
+  },
+  {
+    nome: "Haloperidol",
+    apresentacao: "5 mg/mL solução injetável (IM)",
+    observacoes: "Distribuição conforme NT 01/2024",
+    prescricao: "MEDICAMENTOS DE EMERGÊNCIA - CONTROLE ESPECIAL Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Maleta%20de%20Emerg%C3%AAncia%20-%20001-2024.pdf"
+  },
+  {
+    nome: "Diclofenaco de sódio",
+    apresentacao: "25 mg/mL solução injetável (IM)",
+    observacoes: "Distribuição conforme NT 02/2024",
+    prescricao: "MEDICAMENTOS DE URGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Medicamentos%20-%20Urg%C3%AAncia%20e%20Uso%20Ambulatorial%20-%20002-2024.pdf"
+  },
+  {
+    nome: "Dipirona",
+    apresentacao: "500 mg/mL solução injetável (IM/EV)",
+    observacoes: "Distribuição conforme NT 02/2024",
+    prescricao: "MEDICAMENTOS DE URGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Medicamentos%20-%20Urg%C3%AAncia%20e%20Uso%20Ambulatorial%20-%20002-2024.pdf"
+  },
+  {
+    nome: "Furosemida",
+    apresentacao: "10 mg/mL solução injetável (IM/EV)",
+    observacoes: "Distribuição conforme NT 02/2024",
+    prescricao: "MEDICAMENTOS DE URGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Medicamentos%20-%20Urg%C3%AAncia%20e%20Uso%20Ambulatorial%20-%20002-2024.pdf"
+  },
+  {
+    nome: "Hioscina (N-butilescopolamina)",
+    apresentacao: "20 mg/mL solução injetável (EV)",
+    observacoes: "Distribuição conforme NT 02/2024",
+    prescricao: "MEDICAMENTOS DE URGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Medicamentos%20-%20Urg%C3%AAncia%20e%20Uso%20Ambulatorial%20-%20002-2024.pdf"
+  },
+  {
+    nome: "Metoclopramida",
+    apresentacao: "5 mg/mL solução injetável (IM/EV)",
+    observacoes: "Distribuição conforme NT 02/2024",
+    prescricao: "MEDICAMENTOS DE URGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Medicamentos%20-%20Urg%C3%AAncia%20e%20Uso%20Ambulatorial%20-%20002-2024.pdf"
+  },
+  {
+    nome: "Prometazina",
+    apresentacao: "25 mg/mL solução injetável (IM)",
+    observacoes: "Distribuição conforme NT 02/2024",
+    prescricao: "MEDICAMENTOS DE URGÊNCIA - BÁSICOS Uso exclusivo ambulatorial",
+    referencia: "https://prefeitura.poa.br/sites/default/files/usu_doc/hotsites/sms/bvaps-biblioteca-virtual-de-atencao-primaria-saude/Nota%20T%C3%A9cnica%20-%20Medicamentos%20-%20Urg%C3%AAncia%20e%20Uso%20Ambulatorial%20-%20002-2024.pdf"
+  }
+       ];
 
         // Variáveis globais
         let currentPage = 1;
